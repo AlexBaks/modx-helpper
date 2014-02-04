@@ -1,0 +1,33 @@
+Вкладки формы:
+
+[
+  {"caption":"Порядок вывода модулей на странице"
+    ,"fields": [
+      {
+        "field":"title"
+        ,"caption":"Загаловок"
+      },{
+        "field":"image"
+        ,"caption":"Изображение"
+        ,"inputTVtype":"image"
+      }
+    ]
+  }
+]
+
+Разметка колонок:
+
+[
+  {
+    "header": "Загаловок"
+    ,"width": "50"
+    ,"sortable": "false"
+    ,"dataIndex": "title"
+  },{
+    "header": "Изображение"
+    ,"width": "50"
+    ,"sortable": "false"
+    ,"dataIndex": "image"
+    ,"renderer": "this.renderImage"
+  }
+]
