@@ -26,3 +26,16 @@ foreach ($res as $val) {
     print_r($val);
     echo "</pre>";
 }
+
+// вариант 2
+
+$packageName = 'catalog';
+$base_path =  $modx->getOption('core_path');
+$success = $modx->addPackage($packageName,$base_path.'components/'.$packageName.'/model/','modx_');
+echo "\naddPackage " . ($success? 'OK' : 'Failed');
+$success = $modx->loadClass('CatalogContent');
+echo "\nloadClass " . ($success  ? 'OK' : 'Failed');
+$access = $modx->getObject('CatalogContent', 1);
+echo '<pre>';
+print_r($access->toArray());
+echo '<pre>'; 
