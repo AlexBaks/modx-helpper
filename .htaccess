@@ -16,3 +16,6 @@ RewriteRule ^(.*)-([0-9]+)* index.php?q=$1&x=$2 [L,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*) index.php?q=$1 [L,QSA]
+
+# передает переменную если в конце ссылки дописать -x где x-переменная.
+# Может что еще подправить необходимо?
