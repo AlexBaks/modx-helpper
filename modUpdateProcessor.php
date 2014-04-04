@@ -1,8 +1,8 @@
 <?php
 
 class modUpdateProcessor  extends modProcessor {
-    
-    public $classKey = 'modResource';
+     
+    public $classKey = 'EcaBanner';
     public $id;
     protected $obj;
     protected $message = '';
@@ -43,6 +43,9 @@ class modUpdateProcessor  extends modProcessor {
     
     public function process(){
         
+        
+        $this->success = true;
+        
         if (!$this->id){
             $this->failure('не указан id');
         }
@@ -50,33 +53,37 @@ class modUpdateProcessor  extends modProcessor {
         if (!$this->getObject()){
             $this->failure('обект не найден');
         }
-        
-        if (!$this->checkAccess()) {
-            $this->failure('нет доступа');
-        }
-        
-        if (!$this->checkValidate()) {
-            $this->failure('не верный формат');
-        }
-        
         if ($this->success) {
-            $this->obj->fromArray($this->set());
-            $this->save();
+            if (!$this->checkAccess()) {
+                $this->failure('нет доступа');
+            }
+            
+            if (!$this->checkValidate()) {
+                $this->failure('не верный формат');
+            }
+            
+            if ($this->success) {
+                $this->obj->fromArray($this->set());
+                $this->save();
+            }
         }
-
 
         return $this->outputArray($this->prepareResponse(), '');
+
     }
     
     public function getObject($id = null) {
         if ($id ){
-            return $this->$obj = $this->modx->getObject($this->classKey,$id);
+            $this->obj = $this->modx->getObject($this->classKey,$id);
         }else{
             
             $c = $this->modx->newQuery($this->classKey);
             $c->where($this->where());
-            return $this->obj = $this->modx->getObject($this->classKey,$c);
+            $this->obj = $this->modx->getObject($this->classKey,$c);
         }
+        
+        if ($this->obj) return true;
+        else return false;
     }
 
     public function where () {
@@ -84,6 +91,9 @@ class modUpdateProcessor  extends modProcessor {
             'id' => $this->id,
         );
     }
+    
+    
+    
     public function set() {
         return $this->post;
     }
