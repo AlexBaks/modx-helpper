@@ -1,4 +1,19 @@
 <?php
+$modx->getService('mail', 'mail.modPHPMailer');
+$message = 'Добавлено обявление';
+$modx->mail->set(modMail::MAIL_BODY,$message);
+$modx->mail->set(modMail::MAIL_FROM,'support@eca.ru');
+$modx->mail->set(modMail::MAIL_FROM_NAME,'robot');
+$modx->mail->set(modMail::MAIL_SUBJECT,'Добавлено обявление');
+$modx->mail->address('to','52018@bk.ru');
+ 
+$modx->mail->setHTML(true);
+if (!$modx->mail->send()) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'An error occurred while trying to send the email: '.$modx->mail->mailer->ErrorInfo);
+}
+$modx->mail->reset();
+
+//--------------------------------------------
 require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/connectors/index.php';
 
 /*Проверка на то что этот пост содержит в себе способ оплаты*/
