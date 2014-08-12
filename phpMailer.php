@@ -1,18 +1,20 @@
 <?php
-require_once(LIB_PATH.'/Phpmailer/PHPMailerAutoload.php');
+require_once('mailer/PHPMailerAutoload.php');
 
 $mail = new PHPMailer;
 
-$mail->isSMTP();  
-$mail->Host = "localhost"; // SMTP server
-$mail->From = "from@example.com";
-$mail->Username = '';                 // SMTP username
-$mail->Password = '';                           // SMTP password
-$mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+//$mail->isSMTP();  
+//$mail->Host = "localhost"; // SMTP server
+$mail->From = 'info@'.$_SERVER['HTTP_HOST'];
+//$mail->Username = '';                 // SMTP username
+//$mail->Password = '';                           // SMTP password
+//$mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
 $mail->CharSet    = 'utf-8';
- 
-$mail->From = 'from@example.com';
+//$mail->SMTPAuth = false;
 $mail->FromName = 'Mailer';
+
+$mail->AddReplyTo('info@'.$_SERVER['HTTP_HOST'],"Hugi");
+
 $mail->addAddress('52018@bk.ru');     // Add a recipient
 $mail->addAddress('alexbaks@bk.ru');
 /*
@@ -36,5 +38,4 @@ if(!$mail->send()) {
 } else {
     echo 'Message has been sent';
 }
-
 php?>
