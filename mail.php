@@ -1,4 +1,16 @@
 <?php
+// Простой mail
+$to      = '52018@bk.ru';
+$subject = 'the subject';
+$message = 'hello';
+$headers = 'From: info@'.$_SERVER['HTTP_HOST']. "\r\n" .
+    'Reply-To: info@'.$_SERVER['HTTP_HOST']. "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+
+//-------------------------------------------
+
 $modx->getService('mail', 'mail.modPHPMailer');
 $message = 'Добавлено обявление';
 $modx->mail->set(modMail::MAIL_BODY,$message);
