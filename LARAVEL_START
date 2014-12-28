@@ -1,0 +1,2 @@
+$totalTime = microtime(true) - LARAVEL_START;
+echo sprintf("%2.4f s", $totalTime);
